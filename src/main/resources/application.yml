@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: order-manager
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/order_manager
+    username: postgres
+    password: rogih21
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      jdbc:
+        lob.non-contextual-creation: true
+    properties:
+      hibernate:
+        show_sql: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: payment-response-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+topic:
+  create-payment-request: create-payment-req
+  create-payment-response: create-payment-resp
